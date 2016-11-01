@@ -49,12 +49,10 @@ command! E e
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 let g:ctrlp_use_caching = 0
 
-" Vim-pathogen
-execute pathogen#infect()
-
 " Solarized scheme
 syntax enable
 set background=dark
+let g:solarized_termcolors=256
 colorscheme solarized
 
 " Ruler 80 columns
