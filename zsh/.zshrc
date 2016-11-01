@@ -90,3 +90,13 @@ export PATH=$PATH:$GOPATH/bin
 
 export NVM_DIR="/Users/samy/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+_not_inside_tmux() { [[ -z "$TMUX" ]] }
+
+ensure_tmux_is_running() {
+  if _not_inside_tmux; then
+    tat
+  fi
+}
+
+ensure_tmux_is_running
