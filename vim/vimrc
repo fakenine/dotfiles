@@ -1,0 +1,60 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-rails'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-commentary'
+Plugin 'thoughtbot/vim-rspec'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Use the space key as our leader. Put this near the top of your vimrc
+let mapleader = "\<Space>"
+
+" Make CtrlP use ag for listing the files. Way faster and no useless files.
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+
+" Split edit your vimrc. Type space, v, r in sequence to trigger
+nmap <leader>vr :sp $MYVIMRC<cr>
+
+" Source (reload) your vimrc. Type space, s, o in sequence to trigger
+nmap <leader>so :source $MYVIMRC<cr>
+
+" Pre-populate a split command with the current directory
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+
+" Copy the entire buffer into the system register
+nmap <leader>co ggVG*y
+
+imap <C-s> <esc>:w<cr>
+
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+set number                      " Display line numbers beside buffer
+set hidden                      " Allow buffer change w/o saving
+set lazyredraw                  " Don't update while executing macros
+set backspace=indent,eol,start  " Sane backspace behavior
+set scrolloff=4                 " Keep at least 4 lines below cursor
+
+" Bind `q` to close the buffer for help files
+autocmd Filetype help nnoremap <buffer> q :q<CR>
+
+" Command aliases for typoed commands (accidentally holding shift too long)
+command! Q q " Bind :Q to :q
+command! Qall qall
+command! QA qall
+command! E e
